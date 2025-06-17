@@ -1,0 +1,129 @@
+    * { 
+        box-sizing: border-box; margin: 0; padding: 0; 
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f9f9fb;
+      color: #333;
+    }
+    header {
+      background: #1f2937;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 { font-size: 1.8rem; }
+    nav a {
+      margin-left: 1rem;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover { 
+        color: white; 
+    }
+
+    .hero {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero h2 { 
+        font-size: 2.5rem; margin-bottom: 1rem; 
+    }
+    
+    .hero p { 
+        max-width: 600px; margin: 0 auto; font-size: 1.1rem; 
+    }
+    
+    .section { 
+        padding: 3rem 2rem; 
+    }
+
+    .section h3 { 
+        text-align: center; font-size: 2rem; margin-bottom: 2rem; 
+    }
+    
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      margin: 1rem;    
+    }
+
+    .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* ✅ Exactly 2 cards per row */
+    gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+    .cards {
+    grid-template-columns: 1fr; /* 1 card per row on smaller screens */
+    }
+    }
+
+    .card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    }
+
+    .card:hover { 
+        transform: translateY(-5px); 
+    }
+
+    .scroll-projects {
+      display: flex;
+      overflow-x: auto;
+      gap: 2rem;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+    }
+
+    .scroll-projects::-webkit-scrollbar { 
+        display: none; 
+    }
+
+    .project-card {
+      min-width: 100px;
+      scroll-snap-align: start;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .project-card h4 { 
+        margin-top: 1rem; 
+        font-size: 1.1rem; 
+    }
+
+    footer {
+      background: #1f2937;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem;
+      margin-top: .1rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.4rem; }
+      .hero h2 { font-size: 1.8rem; }
+    }
