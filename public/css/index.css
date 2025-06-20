@@ -87,7 +87,7 @@
     .scroll-projects {
       display: flex;
       overflow-x: auto;
-      gap: 2rem;
+      gap: 3rem;
       scroll-snap-type: x mandatory;
       padding-bottom: 1rem;
     }
@@ -97,7 +97,7 @@
     }
 
     .project-card {
-      min-width: 100px;
+      min-width: 90px;
       scroll-snap-align: start;
       background: white;
       border-radius: 10px;
@@ -106,7 +106,7 @@
     }
 
     .project-card img {
-      width: 100%;
+      width: 90%;
       border-radius: 8px;
     }
 
