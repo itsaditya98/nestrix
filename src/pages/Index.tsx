@@ -1,12 +1,75 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { HeroSection } from "@/components/HeroSection";
+import { ServiceSection } from "@/components/ServiceSection";
+import { AboutSection } from "@/components/AboutSection";
+import { ContactSection } from "@/components/ContactSection";
+import { Footer } from "@/components/Footer";
+
+import webDevImage from "@/assets/service-webdev.jpg";
+import marketingImage from "@/assets/service-marketing.jpg";
+import cloudImage from "@/assets/service-cloud.jpg";
+import analyticsImage from "@/assets/service-analytics.jpg";
 
 const Index = () => {
+  const services = [
+    {
+      title: "Web Development",
+      description: "Build powerful, responsive websites and web applications that drive results. Our expert developers use cutting-edge technologies to create seamless digital experiences.",
+      image: webDevImage,
+      features: [
+        "Custom website design and development",
+        "Responsive and mobile-first approach",
+        "E-commerce solutions",
+        "Progressive web applications",
+      ],
+    },
+    {
+      title: "Online Marketing",
+      description: "Amplify your brand's reach with strategic digital marketing campaigns. We leverage SEO, social media, and content marketing to grow your online presence.",
+      image: marketingImage,
+      features: [
+        "Search engine optimization (SEO)",
+        "Social media marketing",
+        "Content strategy and creation",
+        "Pay-per-click advertising",
+      ],
+      reverse: true,
+    },
+    {
+      title: "Cloud Solutions",
+      description: "Scale your business with secure, reliable cloud infrastructure. We help you migrate, manage, and optimize your cloud environment for maximum efficiency.",
+      image: cloudImage,
+      features: [
+        "Cloud migration and integration",
+        "Infrastructure as a Service (IaaS)",
+        "Cloud security and compliance",
+        "24/7 monitoring and support",
+      ],
+    },
+    {
+      title: "Data Analytics",
+      description: "Transform raw data into actionable insights. Our analytics solutions help you make informed decisions and stay ahead of the competition.",
+      image: analyticsImage,
+      features: [
+        "Business intelligence dashboards",
+        "Predictive analytics and AI",
+        "Data visualization and reporting",
+        "Custom analytics solutions",
+      ],
+      reverse: true,
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="overflow-x-hidden">
+      <HeroSection />
+      <div id="services">
+        {services.map((service, index) => (
+          <ServiceSection key={index} {...service} />
+        ))}
       </div>
+      <AboutSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 };
