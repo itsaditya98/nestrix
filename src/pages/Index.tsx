@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 import { SectionNavigator } from "@/components/SectionNavigator";
+import { MobileNavigation } from "@/components/MobileNavigation";
 
 import webDevImage from "@/assets/service-webdev.jpg";
 import marketingImage from "@/assets/service-marketing.jpg";
@@ -64,6 +65,7 @@ const Index = () => {
   return (
     <div className="overflow-x-hidden">
       <SectionNavigator />
+      <MobileNavigation />
       <div id="hero">
         <HeroSection />
       </div>

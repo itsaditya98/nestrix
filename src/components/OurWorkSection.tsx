@@ -45,6 +45,8 @@ export const OurWorkSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,6 +63,23 @@ export const OurWorkSection = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 75) {
+      handleNext();
+    }
+    if (touchStartX.current - touchEndX.current < -75) {
+      handlePrevious();
+    }
+  };
 
   const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
@@ -122,6 +141,9 @@ export const OurWorkSection = () => {
           {/* Carousel Container */}
           <div
             ref={scrollContainerRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
             className="flex overflow-x-hidden scroll-smooth snap-x snap-mandatory"
           >
             {works.map((work, index) => (
@@ -129,16 +151,16 @@ export const OurWorkSection = () => {
                 key={index}
                 className="min-w-full snap-center"
               >
-                <div className="grid md:grid-cols-2 gap-8 items-center px-12">
+                <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center px-4 md:px-12">
                   {/* Left: Content */}
-                  <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-                    <div className="text-sm text-primary font-semibold uppercase tracking-wider">
+                  <div className={`space-y-4 md:space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                    <div className="text-xs md:text-sm text-primary font-semibold uppercase tracking-wider">
                       Client: {work.client}
                     </div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-foreground">
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
                       {work.title}
                     </h3>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                       {work.description}
                     </p>
                     <Button
@@ -150,12 +172,12 @@ export const OurWorkSection = () => {
                   </div>
 
                   {/* Right: Image */}
-                  <div className={`${isVisible ? 'animate-fade-in' : 'opacity-0'} relative`}>
+                  <div className={`${isVisible ? 'animate-fade-in' : 'opacity-0'} relative mt-6 md:mt-0`}>
                     <div className="relative overflow-hidden rounded-lg shadow-2xl">
                       <img
                         src={work.image}
                         alt={work.title}
-                        className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-105"
+                        className="w-full h-[250px] md:h-[350px] lg:h-[400px] object-cover transition-transform duration-500 hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent"></div>
                     </div>

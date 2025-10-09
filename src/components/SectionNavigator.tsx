@@ -44,8 +44,8 @@ export const SectionNavigator = () => {
   };
 
   return (
-    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
-      <div className="flex flex-col gap-6">
+    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block backdrop-blur-sm">
+      <div className="flex flex-col gap-6 bg-background/30 p-3 rounded-full border border-border/30">
         {sections.map((section) => (
           <button
             key={section.id}
@@ -57,17 +57,17 @@ export const SectionNavigator = () => {
             <div
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 activeSection === section.id
-                  ? "bg-primary scale-125"
-                  : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  ? "bg-primary scale-125 shadow-[0_0_10px_hsl(var(--primary)/0.6)]"
+                  : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
               }`}
             />
             
             {/* Label tooltip */}
             <span
-              className={`absolute left-8 whitespace-nowrap px-3 py-1 rounded-md text-sm font-medium transition-all duration-300 ${
+              className={`absolute left-8 whitespace-nowrap px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-300 backdrop-blur-md ${
                 activeSection === section.id
-                  ? "opacity-100 translate-x-0 bg-primary text-primary-foreground"
-                  : "opacity-0 -translate-x-2 bg-muted text-muted-foreground group-hover:opacity-100 group-hover:translate-x-0"
+                  ? "opacity-100 translate-x-0 bg-primary/90 text-primary-foreground shadow-lg"
+                  : "opacity-0 -translate-x-2 bg-background/80 text-foreground border border-border/50 group-hover:opacity-100 group-hover:translate-x-0"
               }`}
             >
               {section.label}
