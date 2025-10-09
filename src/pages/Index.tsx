@@ -6,6 +6,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 import { SectionNavigator } from "@/components/SectionNavigator";
 import { MobileNavigation } from "@/components/MobileNavigation";
+import { SectionDivider } from "@/components/SectionDivider";
 
 import webDevImage from "@/assets/service-webdev.jpg";
 import marketingImage from "@/assets/service-marketing.jpg";
@@ -66,18 +67,38 @@ const Index = () => {
     <div className="overflow-x-hidden">
       <SectionNavigator />
       <MobileNavigation />
-      <div id="hero">
-        <HeroSection />
+      
+      {/* Main content with left padding for navigator on desktop */}
+      <div className="lg:pl-0">
+        <div id="hero">
+          <HeroSection />
+        </div>
+        
+        <SectionDivider />
+        
+        <div id="services">
+          {services.map((service, index) => (
+            <div key={index}>
+              <ServiceSection {...service} />
+              {index < services.length - 1 && <SectionDivider />}
+            </div>
+          ))}
+        </div>
+        
+        <SectionDivider />
+        
+        <OurWorkSection />
+        
+        <SectionDivider />
+        
+        <AboutSection />
+        
+        <SectionDivider />
+        
+        <ContactSection />
+        
+        <Footer />
       </div>
-      <div id="services">
-        {services.map((service, index) => (
-          <ServiceSection key={index} {...service} />
-        ))}
-      </div>
-      <OurWorkSection />
-      <AboutSection />
-      <ContactSection />
-      <Footer />
     </div>
   );
 };
