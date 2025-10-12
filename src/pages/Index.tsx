@@ -69,7 +69,7 @@ const Index = () => {
       <MobileNavigation />
       
       {/* Main content with left padding for navigator on desktop */}
-      <div className="lg:pl-48">
+      <div className="lg:pl-40">
         <div id="hero">
           <HeroSection />
         </div>
