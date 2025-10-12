@@ -179,7 +179,7 @@ export const OurWorkSection = () => {
                         alt={work.title}
                         className="w-full h-[250px] md:h-[350px] lg:h-[400px] object-cover transition-transform duration-500 hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent"></div>
                     </div>
                   </div>
                 </div>

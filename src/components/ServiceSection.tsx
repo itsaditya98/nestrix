@@ -48,7 +48,7 @@ export const ServiceSection = ({
           backgroundPosition: 'center'
         }}
       >
-        <div className={`absolute inset-0 ${reverse ? 'bg-gradient-to-l' : 'bg-gradient-to-r'} from-background/70 via-background/80 to-background/85`}></div>
+        <div className={`absolute inset-0 ${reverse ? 'bg-gradient-to-l' : 'bg-gradient-to-r'} from-background/50 via-background/55 to-background/60`}></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-0 max-w-7xl">

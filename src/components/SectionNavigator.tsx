@@ -81,8 +81,8 @@ export const SectionNavigator = () => {
   };
 
   return (
-    <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
-      <div className="flex flex-col gap-4 bg-background/40 backdrop-blur-md p-4 rounded-2xl shadow-lg">
+    <nav className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
+      <div className="flex flex-col gap-3 bg-background/30 backdrop-blur-md p-3 rounded-xl shadow-lg">
         {sections.map((section) => {
           const hasSubsections = 'subsections' in section && section.subsections;
           const isExpanded = expandedSections.includes(section.id);
