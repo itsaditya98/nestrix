@@ -68,8 +68,7 @@ const Index = () => {
       <SectionNavigator />
       <MobileNavigation />
       
-      {/* Main content with left padding for navigator on desktop */}
-      <div className="lg:pl-40">
+      <div>
         <div id="hero">
           <HeroSection />
         </div>

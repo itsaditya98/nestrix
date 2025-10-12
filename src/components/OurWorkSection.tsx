@@ -108,7 +108,7 @@ export const OurWorkSection = () => {
       id="our-work"
       className="min-h-screen flex items-center justify-center relative bg-background"
     >
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 py-20 lg:pl-40">
         <div className={`text-center mb-12 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Our Work

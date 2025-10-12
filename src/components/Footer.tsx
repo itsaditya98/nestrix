@@ -3,7 +3,7 @@ import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 export const Footer = () => {
   return (
     <footer className="bg-card border-t border-border py-12">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 lg:pl-40">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-xl font-bold text-primary mb-4">Nestrix</h3>

@@ -52,7 +52,7 @@ export const ContactSection = () => {
 
   return (
     <section id="contact" className="min-h-screen flex items-center justify-center py-20 bg-background">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 lg:pl-40">
         <div className={`text-center mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
             Get In <span className="text-primary">Touch</span>

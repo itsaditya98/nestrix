@@ -16,7 +16,7 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background/70"></div>
       </div>
       
-      <div className="relative z-10 text-center px-4 animate-fade-in-up">
+      <div className="relative z-10 text-center px-4 lg:pl-40 animate-fade-in-up">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
           Welcome to <span className="text-primary">Nestrix</span>
         </h1>
