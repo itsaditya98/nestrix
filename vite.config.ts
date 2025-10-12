@@ -8,22 +8,23 @@ export default defineConfig(({ mode }) => {
   const isDev = mode === "development";
 
   return {
+    base: "/", // ✅ Important for custom domain deployment (nestrix.synergize.co)
     server: {
-      host: "::",       // Allow access from network (IPv6 + IPv4)
-      port: 8080,       // Dev server port
+      host: "::",       // Allow external access (IPv6 + IPv4)
+      port: 8080,       // Local dev server port
     },
     plugins: [
-      react(),          // React + SWC plugin for fast refresh
-      isDev && componentTagger(), // Enable component tagging only in dev
+      react(),          // React + SWC plugin
+      isDev && componentTagger(), // Only active in dev
     ].filter(Boolean),
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"), // Shortcut for imports
+        "@": path.resolve(__dirname, "./src"),
       },
     },
     build: {
-      outDir: "dist",   // Default build output directory
-      sourcemap: isDev, // Enable source maps in dev mode
+      outDir: "dist",   // Output directory
+      sourcemap: isDev, // Source maps only in dev
     },
   };
 });
