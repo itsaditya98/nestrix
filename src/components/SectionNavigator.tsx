@@ -44,18 +44,17 @@ export const SectionNavigator = () => {
   };
 
   return (
-    <nav className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
+    <nav className="fixed left-5 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
       <div
         className="
-          flex flex-col gap-1.5 
-          bg-background/40 
+          flex flex-col gap-3.5 
+          bg-background/95 
           backdrop-blur-xl 
-          p-2.5 
+          p-8 
           rounded-xl 
           shadow-[0_4px_20px_rgba(0,0,0,0.12)]
           border border-border/40
-          w-36
-        "
+          w-22        "
       >
         {sections.map((section) => {
           const isActive = activeSection === section.id;
