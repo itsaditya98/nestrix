@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nestrix.synergize.co/sitemap.xml

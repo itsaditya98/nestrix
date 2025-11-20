@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+// ✅ Import images properly (same as OurWorkSection)
+import webdevImage from "@/assets/service-webdev.jpg";
+import marketingImage from "@/assets/service-marketing.jpg";
+import cloudImage from "@/assets/service-cloud.jpg";
+import analyticsImage from "@/assets/service-analytics.jpg";
+
 export const ServiceSection = () => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
@@ -11,7 +17,7 @@ export const ServiceSection = () => {
     {
       title: "Website Development",
       short: "Modern, responsive, and business-ready web development.",
-      image: "/src/assets/service-webdev.jpg",
+      image: webdevImage, // ✅ fixed
       features: [
         "Pixel-perfect UI",
         "SEO-optimized pages",
@@ -23,7 +29,7 @@ export const ServiceSection = () => {
     {
       title: "Digital Marketing",
       short: "End-to-end online marketing strategies for growth.",
-      image: "/src/assets/service-marketing.jpg",
+      image: marketingImage, // ✅ fixed
       features: [
         "Google Ads campaign setup",
         "Brand identity + messaging",
@@ -35,7 +41,7 @@ export const ServiceSection = () => {
     {
       title: "Cloud Solutions",
       short: "Reliable cloud hosting, scaling, and deployment.",
-      image: "/src/assets/service-cloud.jpg",
+      image: cloudImage, // ✅ fixed
       features: [
         "AWS / Azure deployment",
         "Auto-scaling servers",
@@ -47,7 +53,7 @@ export const ServiceSection = () => {
     {
       title: "AI & Automation",
       short: "Smart automation and AI solutions for business tasks.",
-      image: "/src/assets/service-analytics.jpg",
+      image: analyticsImage, // ✅ fixed
       features: [
         "AI chatbots",
         "Workflow automation",
@@ -58,7 +64,7 @@ export const ServiceSection = () => {
     },
   ];
 
-  // SAME animation logic as OurWorkSection
+  // animations (unchanged)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -69,7 +75,6 @@ export const ServiceSection = () => {
             card.classList.add("animate-fade-in-up");
             card.classList.remove("opacity-0");
           } else {
-            // reset to re-trigger animation every scroll
             card.classList.remove("animate-fade-in-up");
             card.classList.add("opacity-0");
           }
@@ -93,17 +98,15 @@ export const ServiceSection = () => {
     <section id="services" className="min-h-screen bg-background py-20">
       <div className="container mx-auto px-4 lg:pl-52">
 
-        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-             Services
+            Services
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             High-impact digital solutions crafted for your business success.
           </p>
         </div>
 
-        {/* 2 cards on large screen */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const isFlipped = flippedIndex === index;
@@ -140,13 +143,12 @@ export const ServiceSection = () => {
                       </p>
 
                       <Button
-                      variant="ghost"
+                        variant="ghost"
                         className="!bg-transparent hover:bg-transparent hover:text-primary hover:opacity-80"
                         onClick={() => handleFlip(index)}
-                        >
+                      >
                         Learn More <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-
                     </div>
                   </div>
 
