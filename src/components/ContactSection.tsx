@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,7 +6,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export const ContactSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const toggleTimer = useRef<number | null>(null);
+  const lastVisible = useRef<boolean | null>(null); // remember last state to avoid redundant updates
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -15,24 +17,61 @@ export const ContactSection = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    // Make sure section starts hidden
+    section.classList.add("opacity-0", "translate-y-6");
+
+    // Debounced toggle helper
+    const applyVisibility = (visible: boolean) => {
+      // don't change if same
+      if (lastVisible.current === visible) return;
+      lastVisible.current = visible;
+
+      // clear pending
+      if (toggleTimer.current) {
+        window.clearTimeout(toggleTimer.current);
+        toggleTimer.current = null;
+      }
+
+      // small debounce — avoid flicker on tiny scrolls
+      toggleTimer.current = window.setTimeout(() => {
+        if (visible) {
+          section.classList.add("animate-fade-in-up", "opacity-100", "translate-y-0");
+          section.classList.remove("opacity-0", "translate-y-6");
+        } else {
+          section.classList.remove("animate-fade-in-up", "opacity-100", "translate-y-0");
+          section.classList.add("opacity-0", "translate-y-6");
+        }
+        toggleTimer.current = null;
+      }, 120); // 120ms debounce — adjust if needed
+    };
+
+    // Use rootMargin so "enter" is a bit earlier and "exit" a bit later, preventing on-edge flicker
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        // require reasonable intersection ratio too to avoid tiny tap toggles
+        const visible = entry.isIntersecting && entry.intersectionRatio > 0.2;
+        applyVisibility(visible);
       },
-      { threshold: 0.2 }
+      {
+        threshold: [0, 0.2, 0.35, 0.5],
+        rootMargin: "0px 0px -18% 0px", // treat the section as still "in view" while near bottom
+      }
     );
 
-    const element = document.getElementById("contact");
-    if (element) observer.observe(element);
+    observer.observe(section);
 
-    return () => observer.disconnect();
+    return () => {
+      if (toggleTimer.current) window.clearTimeout(toggleTimer.current);
+      observer.disconnect();
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name.trim() || !formData.mobile.trim() || !formData.query.trim()) {
       toast({
         title: "Error",
@@ -51,9 +90,14 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center py-20 bg-background">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="min-h-screen flex items-center justify-center py-20 bg-background opacity-0 translate-y-6 transition-all duration-[900ms] ease-out"
+    >
       <div className="container mx-auto px-4 lg:pl-40">
-        <div className={`text-center mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+        {/* Header */}
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
             Get In <span className="text-primary">Touch</span>
           </h2>
@@ -63,7 +107,8 @@ export const ContactSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          {/* Contact Info */}
+          <div className="space-y-8">
             <div className="flex items-start gap-4">
               <Mail className="h-6 w-6 text-primary mt-1" />
               <div>
@@ -71,6 +116,7 @@ export const ContactSection = () => {
                 <p className="text-muted-foreground">contact@nestrix.com</p>
               </div>
             </div>
+
             <div className="flex items-start gap-4">
               <Phone className="h-6 w-6 text-primary mt-1" />
               <div>
@@ -78,6 +124,7 @@ export const ContactSection = () => {
                 <p className="text-muted-foreground">+1 (555) 123-4567</p>
               </div>
             </div>
+
             <div className="flex items-start gap-4">
               <MapPin className="h-6 w-6 text-primary mt-1" />
               <div>
@@ -87,7 +134,8 @@ export const ContactSection = () => {
             </div>
           </div>
 
-          <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+          {/* Form */}
+          <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <Input
@@ -97,6 +145,7 @@ export const ContactSection = () => {
                   className="bg-card border-border"
                 />
               </div>
+
               <div>
                 <Input
                   placeholder="Mobile Number"
@@ -106,6 +155,7 @@ export const ContactSection = () => {
                   className="bg-card border-border"
                 />
               </div>
+
               <div>
                 <Textarea
                   placeholder="Your Query"
@@ -114,6 +164,7 @@ export const ContactSection = () => {
                   className="bg-card border-border min-h-[150px]"
                 />
               </div>
+
               <Button
                 type="submit"
                 size="lg"

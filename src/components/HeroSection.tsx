@@ -1,28 +1,50 @@
+import { useEffect, useRef, useState } from "react";
 import heroImage from "@/assets/hero-nestrix.jpg";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
 export const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [bgVisible, setBgVisible] = useState(false);
+
+  useEffect(() => {
+    const sec = sectionRef.current;
+    if (!sec) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setBgVisible(entry.isIntersecting),
+      { threshold: 0.25 }
+    );
+
+    observer.observe(sec);
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToServices = () => {
     document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background/70"></div>
-      </div>
-      
+    <section
+      ref={sectionRef}
+      className="
+        relative h-screen flex items-center justify-center
+        overflow-hidden bg-fixed bg-cover bg-center
+      "
+      style={{ backgroundImage: `url(${heroImage})` }}
+    >
+      {/* ❌ Removed gradient / white overlay completely */}
+
+      {/* Content */}
       <div className="relative z-10 text-center px-4 lg:pl-40 animate-fade-in-up">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
+        {/*<h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
           Welcome to <span className="text-primary">Nestrix</span>
         </h1>
+
         <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto">
           Transforming businesses through innovative technology solutions
-        </p>
+        </p>*/}
+
         <Button
           onClick={scrollToServices}
           size="lg"
@@ -33,7 +55,8 @@ export const HeroSection = () => {
         </Button>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
         <ArrowDown className="h-8 w-8 text-primary" />
       </div>
     </section>

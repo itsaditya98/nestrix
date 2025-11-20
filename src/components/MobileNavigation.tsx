@@ -28,16 +28,16 @@ export const MobileNavigation = () => {
         variant="ghost"
         size="icon"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 z-50 lg:hidden bg-background/80 backdrop-blur-sm border border-border/50 hover:bg-background/90"
+        className="fixed top-4 right-4 z-50 lg:hidden bg-background/20 backdrop-blur-sm border border-border/30 hover:bg-background/30"
         aria-label="Toggle menu"
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Transparent Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-background/95 backdrop-blur-md z-40 lg:hidden"
+          className="fixed inset-0 bg-transparent backdrop-blur-lg z-40 lg:hidden"
           onClick={() => setIsOpen(false)}
         >
           <nav className="flex flex-col items-center justify-center h-full gap-8">
@@ -45,7 +45,7 @@ export const MobileNavigation = () => {
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className="text-2xl font-semibold text-foreground hover:text-primary transition-colors duration-300"
+                className="text-2xl font-semibold text-foreground hover:text-primary transition-colors duration-300 drop-shadow-lg"
               >
                 {section.label}
               </button>

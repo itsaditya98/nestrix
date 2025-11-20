@@ -1,18 +1,8 @@
 import { useEffect, useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
 
 const sections = [
   { id: "hero", label: "Home" },
-  { 
-    id: "services", 
-    label: "Services",
-    subsections: [
-      { id: "service-web-development", label: "Web Development" },
-      { id: "service-online-marketing", label: "Online Marketing" },
-      { id: "service-cloud-solutions", label: "Cloud Solutions" },
-      { id: "service-data-analytics", label: "Data Analytics" },
-    ]
-  },
+  { id: "services", label: "Services" },
   { id: "our-work", label: "Our Work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
@@ -20,13 +10,11 @@ const sections = [
 
 export const SectionNavigator = () => {
   const [activeSection, setActiveSection] = useState("hero");
-  const [expandedSections, setExpandedSections] = useState<string[]>(["services"]);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      // Check all sections including subsections
       for (const section of sections) {
         const element = document.getElementById(section.id);
         if (element) {
@@ -37,23 +25,6 @@ export const SectionNavigator = () => {
           ) {
             setActiveSection(section.id);
             break;
-          }
-        }
-        
-        // Check subsections
-        if ('subsections' in section && section.subsections) {
-          for (const subsection of section.subsections) {
-            const subElement = document.getElementById(subsection.id);
-            if (subElement) {
-              const { offsetTop, offsetHeight } = subElement;
-              if (
-                scrollPosition >= offsetTop &&
-                scrollPosition < offsetTop + offsetHeight
-              ) {
-                setActiveSection(subsection.id);
-                break;
-              }
-            }
           }
         }
       }
@@ -72,99 +43,52 @@ export const SectionNavigator = () => {
     }
   };
 
-  const toggleSection = (sectionId: string) => {
-    setExpandedSections(prev => 
-      prev.includes(sectionId) 
-        ? prev.filter(id => id !== sectionId)
-        : [...prev, sectionId]
-    );
-  };
-
   return (
     <nav className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
-      <div className="flex flex-col gap-2 bg-background/30 backdrop-blur-md p-2 rounded-lg shadow-lg">
+      <div
+        className="
+          flex flex-col gap-1.5 
+          bg-background/40 
+          backdrop-blur-xl 
+          p-2.5 
+          rounded-xl 
+          shadow-[0_4px_20px_rgba(0,0,0,0.12)]
+          border border-border/40
+          w-36
+        "
+      >
         {sections.map((section) => {
-          const hasSubsections = 'subsections' in section && section.subsections;
-          const isExpanded = expandedSections.includes(section.id);
-          const isActive = activeSection === section.id || 
-            (hasSubsections && section.subsections?.some(sub => sub.id === activeSection));
+          const isActive = activeSection === section.id;
 
           return (
-            <div key={section.id} className="relative">
-              <button
-                onClick={() => {
-                  if (hasSubsections) {
-                    toggleSection(section.id);
-                  } else {
-                    scrollToSection(section.id);
-                  }
-                }}
-                className="group relative flex items-center gap-2"
-                aria-label={`Go to ${section.label}`}
+            <button
+              key={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className="
+                group flex items-center gap-2 py-1.5 px-2 rounded-lg 
+                transition-all duration-300 w-full
+                hover:bg-muted/40
+              "
+            >
+              {/* Dot indicator */}
+              <div
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  isActive
+                    ? "bg-primary scale-125 shadow-[0_0_10px_hsl(var(--primary)/0.7)]"
+                    : "bg-muted-foreground/30 group-hover:bg-muted-foreground/50"
+                }`}
+              />
+
+              {/* Label */}
+              <span
+                className={`
+                  text-xs font-medium tracking-wide transition-all duration-300
+                  ${isActive ? "text-primary" : "text-muted-foreground/80 group-hover:text-foreground"}
+                `}
               >
-                {/* Dot indicator */}
-                <div
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    isActive
-                      ? "bg-primary scale-125 shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
-                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
-                />
-                
-                {/* Label */}
-                <span
-                  className={`text-xs font-medium transition-all duration-300 ${
-                    isActive
-                      ? "text-primary opacity-100"
-                      : "text-muted-foreground opacity-70 group-hover:opacity-100"
-                  }`}
-                >
-                  {section.label}
-                </span>
-
-                {/* Expand icon for sections with subsections */}
-                {hasSubsections && (
-                  <div className="ml-1">
-                    {isExpanded ? (
-                      <ChevronUp className="w-3 h-3 text-muted-foreground" />
-                    ) : (
-                      <ChevronDown className="w-3 h-3 text-muted-foreground" />
-                    )}
-                  </div>
-                )}
-              </button>
-
-              {/* Subsections */}
-              {hasSubsections && isExpanded && (
-                <div className="ml-5 mt-2 space-y-2 pl-3 border-l border-border/30">
-                  {section.subsections?.map((subsection) => (
-                    <button
-                      key={subsection.id}
-                      onClick={() => scrollToSection(subsection.id)}
-                      className="group relative flex items-center gap-2"
-                      aria-label={`Go to ${subsection.label}`}
-                    >
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                          activeSection === subsection.id
-                            ? "bg-primary scale-125 shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
-                            : "bg-muted-foreground/20 hover:bg-muted-foreground/40"
-                        }`}
-                      />
-                      <span
-                        className={`text-xs transition-all duration-300 ${
-                          activeSection === subsection.id
-                            ? "text-primary opacity-100 font-medium"
-                            : "text-muted-foreground opacity-60 group-hover:opacity-90"
-                        }`}
-                      >
-                        {subsection.label}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                {section.label}
+              </span>
+            </button>
           );
         })}
       </div>
