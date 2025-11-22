@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import heroImage from "@/assets/hero-nestrix.jpg";
+import heroImage from "@/assets/hero-bg.png";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
@@ -33,17 +33,13 @@ export const HeroSection = () => {
       "
       style={{ backgroundImage: `url(${heroImage})` }}
     >
-      {/* ❌ Removed gradient / white overlay completely */}
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 lg:pl-40 animate-fade-in-up">
-        {/*<h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
-          Welcome to <span className="text-primary">Nestrix</span>
-        </h1>
-
-        <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto">
+      {/* Content  */}
+      <div className="relative z-10 text-center px-4 lg:pl-45 animate-fade-in-up">
+  
+        <p className="text-xl md:text-4xl mb-8 text-white max-w-3xl mx-auto">
           Transforming businesses through innovative technology solutions
-        </p>*/}
+        </p>*
 
         <Button
           onClick={scrollToServices}
