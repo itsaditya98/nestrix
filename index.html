@@ -1,41 +1,119 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- ========================================= -->
+    <!-- 🔰 Essential Meta -->
+    <!-- ========================================= -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="theme-color" content="#0b72ff" />
+    <meta name="format-detection" content="telephone=no" />
 
+    <!-- ========================================= -->
+    <!-- 🔥 Title & Description (SEO) -->
+    <!-- ========================================= -->
     <title>Nestrix — Digital Transformation & IT Solutions</title>
-    <meta
-      name="description"
-      content="Nestrix delivers modern web development, cloud solutions, branding, and digital transformation services."
-    />
-    <link rel="canonical" href="https://www.nestrix.synergize.co/" />
+    <meta name="description" content="Nestrix provides innovative web development, digital solutions, cloud and data-driven business transformation services." />
+    <meta name="author" content="Nestrix" />
+    <meta name="robots" content="index,follow" />
 
-    <!-- OG -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Nestrix — Digital Transformation & IT Solutions" />
-    <meta
-      property="og:description"
-      content="Nestrix helps brands grow with web development, cloud, analytics, and digital strategy."
-    />
-    <meta property="og:url" content="https://www.nestrix.synergize.co/" />
-    <meta
-      property="og:image"
-      content="https://storage.googleapis.com/gpt-engineer-file-uploads/Eh4TpXyx9Pbz1Q8QrVTuK26uCAX2/social-images/social-1759925760373-hero-nestrix.jpg"
-    />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="XixUve9y_0Xu1-BEyEZGE6Fb6V8h_CryHUKSFvvvF4g" />
 
-    <!-- Favicon -->
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.nestrix.synergize.co/" />
+
+    <!-- ========================================= -->
+    <!-- 🖼 Open Graph / Social -->
+    <!-- ========================================= -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Nestrix" />
+    <meta property="og:title" content="Nestrix — Digital Transformation & IT Solutions" />
+    <meta property="og:description" content="Nestrix helps businesses grow through web development, branding, analytics, and scalable cloud solutions." />
+    <meta property="og:url" content="https://www.nestrix.synergize.co/" />
+    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Eh4TpXyx9Pbz1Q8QrVTuK26uCAX2/social-images/social-1759925760373-hero-nestrix.jpg" />
+    <!-- Optional but useful when you know dimensions -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- ========================================= -->
+    <!-- 🐦 Twitter Card -->
+    <!-- ========================================= -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nestrix — Digital Transformation & IT Solutions" />
+    <meta name="twitter:description" content="Modern digital solutions engineered for growth. Web development, online marketing, cloud services, data analytics." />
+    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Eh4TpXyx9Pbz1Q8QrVTuK26uCAX2/social-images/social-1759925760373-hero-nestrix.jpg" />
+
+    <!-- ========================================= -->
+    <!-- 🌐 Favicons & Apple -->
+    <!-- ========================================= -->
+    <!-- Prefer local files (place /public/favicon-*.png /favicon.ico /apple-touch-icon.png) -->
     <link rel="icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="msapplication-TileColor" content="#0b72ff" />
+
+    <!-- ========================================= -->
+    <!-- ⚡ Performance: Preconnect / Preload -->
+    <!-- ========================================= -->
+    <!-- Preconnect to hosting used for large social images or fonts -->
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin />
+    <!-- Preload main social image so shares show quickly when crawled -->
+    <link rel="preload" as="image" href="https://storage.googleapis.com/gpt-engineer-file-uploads/Eh4TpXyx9Pbz1Q8QrVTuK26uCAX2/social-images/social-1759925760373-hero-nestrix.jpg" />
+
+    <!-- If you use Google Fonts, preconnect & load selectively (example) -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> -->
+
+    <!-- ========================================= -->
+    <!-- 📘 Structured Data (Organization + WebSite) -->
+    <!-- ========================================= -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Nestrix",
+          "url": "https://www.nestrix.synergize.co/",
+          "logo": "https://www.nestrix.synergize.co/logo.png",
+          "sameAs": [
+            "https://www.linkedin.com",
+            "https://www.instagram.com",
+            "https://www.twitter.com"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://www.nestrix.synergize.co/",
+          "name": "Nestrix",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.nestrix.synergize.co/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ========================================= -->
+    <!-- 📝 Notes for Developers -->
+    <!-- ========================================= -->
+    <!--
+      - Keep the development entry as /src/main.tsx so Vite can replace it during build.
+      - During `npm run build` Vite will output dist/index.html with concrete asset filenames and correct paths.
+      - Do NOT manually change the generated dist/index.html — let the CI publish dist/.
+    -->
+
   </head>
 
   <body>
     <div id="root"></div>
 
-    <!-- Vite will replace this during build -->
+    <!--  Development entry (Vite will rewrite this in production build) -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
