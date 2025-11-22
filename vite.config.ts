@@ -2,31 +2,24 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-export default defineConfig(({ mode }) => {
-  const isDev = mode === "development";
+export default defineConfig({
+  base: "/", // required for custom domain root
 
-  return {
-    // Your site loads from root domain, so keep this:
-    base: "/",
+  plugins: [react()],
 
-    server: {
-      host: "::",
-      port: 8080,
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
+  },
 
-    plugins: [
-      react(),
-    ],
+  build: {
+    outDir: "dist",
+    sourcemap: false,
+  },
 
-    resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-      },
-    },
-
-    build: {
-      outDir: "dist",
-      sourcemap: isDev,
-    },
-  };
+  server: {
+    port: 8080,
+    host: "::",
+  },
 });
